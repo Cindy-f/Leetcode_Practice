@@ -10,31 +10,28 @@
  */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        // Dummy head node to simplify list construction
-        ListNode dummyHead = new ListNode(0);
-        ListNode current = dummyHead;
+        // Use a dummy node to easily construct the head of the output list
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
         int carry = 0;
-
-        // Loop until both lists are fully traversed and no carry remains
+        // Process both lists until both are null and no carry remains
         while (l1 != null || l2 != null || carry != 0) {
             int sum = carry;
-
             if (l1 != null) {
                 sum += l1.val;
                 l1 = l1.next;
             }
-
             if (l2 != null) {
                 sum += l2.val;
                 l2 = l2.next;
             }
-
-            // Calculate new carry and current digit
+            // Extract the new carry 
             carry = sum / 10;
+            // Store only the single digit
             current.next = new ListNode(sum % 10);
             current = current.next;
         }
-
-        return dummyHead.next;
+        // return the exact head (skipping the dummy node)
+        return dummy.next; 
     }
 }
